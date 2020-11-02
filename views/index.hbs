@@ -1,0 +1,140 @@
+<!--<h1>{{title}}</h1>
+<p>Hello {{title}}</p>
+
+<form method="post">
+  <input name="number" value="{{number}}">
+  <input type="submit" value="Square">
+  <input value="{{result}}">
+</form>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>18120169 - Nguyễn Thùy Dương</title>
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<!-- Bootstrap CSS -->
+</head>
+<body>
+<form action="/" method="POST" id="myForm">
+	<div class="container" style="margin-top: 50px;" >
+        <div class="row">
+            <aside class="col-sm-3"></aside>
+            <aside class="col-sm-6">    
+                <div class="card">
+                    <article class="card-body">
+                        <h4 class="card-title mb-4 mt-1">Bé tập tính</h4>
+                        <hr>
+                        <div>
+                        	<!--Nhập input-->
+                            <div class="form-group">
+                                <input type="text" id="num1" name="num1" onkeyup="checkNumber()" class="form-control" placeholder="Số thứ nhất" value="{{num1}}">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" id="num2" name="num2" onkeyup="checkNumber()" class="form-control" placeholder="Số thứ hai" value="{{num2}}">
+                            </div> 
+                            <!--Nhập input-->
+
+                            <!--chọn operator-->
+                            <div class="col-md-6 text-left">
+			                    <input type="radio" id="sum" name="operator" {{sumchecked}} value="sum">
+			                    <label for="sum">Cộng</label>
+			                    <input type="radio" id="sub" name="operator" {{subchecked}} value="sub">
+			                    <label for="sub">Trừ</label>
+			                </div>
+			                <div class="col-md-6 text-left ">
+			                    <input type="radio" id="mul" name="operator" {{mulchecked}} value="mul">
+			                    <label for="mul">Nhân</label>
+			                    <input type="radio" id="div" name="operator" {{divchecked}} value="div">
+			                    <label for="div">Chia</label>
+		                    </div>
+		                    <!--chọn operator-->
+
+		                    <!--Bảng thông báo-->
+                            <div class="alert alert-warning" style="background-color: #FFE1FF;">
+                                <strong>Thông báo!</strong>
+                                <p id="data1" hidden="hidden">Dữ liệu ở ô <i>Số thứ nhất</i> không phải là số thực.</p>
+			                    <p id="data2" hidden="hidden">Dữ liệu ở ô <i>Số thứ hai</i> không phải là số thực.</p>
+			                    <p id="op" hidden="hidden">Bạn chưa chọn phép tính.</p>
+			                    <p id="fill" hidden="hidden">Chưa điền đủ 2 số để thực hiện phép tính</p>
+                            </div>
+                            <!--Bảng thông báo-->
+
+                            <!--tính toán và xuất kết quả-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <button type="submit" name="submit" onclick="calculate()" class="btn btn-primary btn-block"> Tính  </button>
+                                    </div> 
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <input type="text" name="result" id="result" class="form-control" placeholder="Kết quả" value="{{result}}">
+                                </div>                                            
+                            </div>
+                            <!--tính toán và xuất kết quả-->
+                        </div>
+                    </article>
+                </div>
+            </aside>
+        </div>
+    </div> 
+</form>
+
+	<script type="text/javascript">
+		function calculate()
+		{
+			var num1 = document.getElementById('num1').value;
+			var num2 = document.getElementById('num2').value;
+			
+			var temp = false;
+
+			//Kiểm tra đã nhập đủ 2 số hay chưa
+			if(num1.length != 0 && num2.length != 0)
+			{
+				temp = true;
+			}
+
+			//Câu lệnh giúp lấy chính sách từng radio, kiểm tra các radio
+			let opt;
+			let operators = document.getElementsByName("operator");
+			for(i = 0; i < operators.length; i++){
+				if(operators[i].checked)
+				{
+					opt = operators[i].value;
+					break;
+				}
+			}
+
+			if(opt != "sum" && opt != "sub" && opt != "mul" && opt != "div")
+			{
+				document.getElementById('op').hidden = '';
+			}
+
+			if (!temp) 
+			{
+				document.getElementById('fill').hidden = '';
+			}
+			
+		}
+
+		function checkNumber()
+		{
+			var num1 = document.getElementById('num1').value;
+			var num2 = document.getElementById('num2').value;
+			//Nếu số thứ nhất không phải là số - Not a Number
+			if(isNaN(num1))
+			{
+				document.getElementById('data1').hidden = '';
+			}
+			//Nếu số thứ hai không phải là số - Not a Number
+			if(isNaN(num2))
+			{
+				document.getElementById('data2').hidden = '';
+			}
+		}
+	</script>
+
+</body>
+</html>
